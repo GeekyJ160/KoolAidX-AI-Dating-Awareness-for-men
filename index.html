@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KoolAidX Ai - Dating Awareness for men</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -16,6 +17,14 @@
             <form>
                 <input type="text" name="search" placeholder="Enter name, phone number, etc.">
                 <button type="submit">Search</button>
+            </form>
+        </section>
+        <section id="new-post">
+            <h2>Add a New Post</h2>
+            <form>
+                <input type="text" id="new-post-name" placeholder="Enter woman's name" required>
+                <textarea id="new-post-description" placeholder="Describe your experience" required></textarea>
+                <button type="submit">Submit Post</button>
             </form>
         </section>
         <section id="posts">
@@ -35,5 +44,6 @@
     <footer>
         <p>&copy; 2025 KoolAidX Ai. All rights reserved.</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
