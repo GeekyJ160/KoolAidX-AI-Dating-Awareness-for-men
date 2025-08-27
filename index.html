@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KoolAidX - AI-Powered Dating Awareness for Men</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
     <header class="hero">
@@ -16,6 +22,11 @@
                 <a href="#features">Features</a>
                 <a href="#about">About</a>
                 <a href="#contact" class="cta-btn">Get Started</a>
+            </div>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </nav>
         
@@ -90,5 +101,17 @@
     </footer>
 
     <script src="script.js"></script>
+    
+    <!-- Mobile app install prompt -->
+    <div id="installPrompt" class="install-prompt" style="display: none;">
+        <div class="install-prompt-content">
+            <h3>Install KoolAidX</h3>
+            <p>Get the full app experience on your device!</p>
+            <div class="install-prompt-buttons">
+                <button id="installYes" class="primary-btn">Install</button>
+                <button id="installNo" class="secondary-btn">Not now</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
