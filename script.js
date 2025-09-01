@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Mobile navigation toggle
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const mobileNavLinks = document.querySelector('.mobile-nav-links');
+
+    hamburgerMenu.addEventListener('click', function() {
+        this.classList.toggle('open');
+        mobileNavLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileNavLinks.addEventListener('click', function() {
+        hamburgerMenu.classList.remove('open');
+        mobileNavLinks.classList.remove('open');
+    });
+
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('a[href^="#"]');
     navLinks.forEach(link => {
@@ -65,34 +80,16 @@ document.addEventListener('DOMContentLoaded', function() {
         notification.className = `notification ${type}`;
         notification.textContent = message;
         
-        // Add notification styles
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            color: white;
-            font-weight: bold;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.3s ease;
-            ${type === 'success' ? 'background: #4caf50;' : 'background: #f44336;'}
-        `;
-
         document.body.appendChild(notification);
 
         // Animate in
         setTimeout(() => {
-            notification.style.opacity = '1';
-            notification.style.transform = 'translateX(0)';
+            notification.classList.add('show');
         }, 100);
 
         // Auto remove after 3 seconds
         setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateX(100%)';
+            notification.classList.remove('show');
             setTimeout(() => {
                 if (notification.parentNode) {
                     notification.parentNode.removeChild(notification);
@@ -101,25 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Animate stats on scroll
+    // Animate stats on scroll with Intersection Observer
+    const statsSection = document.querySelector('.stats');
     const stats = document.querySelectorAll('.stat-number');
-    const animateStats = () => {
-        stats.forEach(stat => {
-            const rect = stat.getBoundingClientRect();
-            const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-            
-            if (isVisible && !stat.classList.contains('animated')) {
-                stat.classList.add('animated');
-                const finalValue = stat.textContent;
-                const numericValue = parseInt(finalValue.replace(/\D/g, ''));
-                const suffix = finalValue.replace(/[\d]/g, '');
-                
-                animateValue(stat, 0, numericValue, 2000, suffix);
-            }
-        });
-    };
 
-    function animateValue(element, start, end, duration, suffix = '') {
+    const animateValue = (element, start, end, duration, suffix = '') => {
         let startTimestamp = null;
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
@@ -131,32 +114,36 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
         window.requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                stats.forEach(stat => {
+                    if (!stat.classList.contains('animated')) {
+                        stat.classList.add('animated');
+                        const finalValue = stat.textContent;
+                        const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+                        const suffix = finalValue.replace(/[\d]/g, '');
+                        animateValue(stat, 0, numericValue, 2000, suffix);
+                    }
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (statsSection) {
+        observer.observe(statsSection);
     }
-
-    // Listen for scroll events to trigger animations
-    window.addEventListener('scroll', animateStats);
-
-    // Feature card hover effects
-    const featureCards = document.querySelectorAll('.feature-card');
-    featureCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
 
     // Add scroll-based navbar background
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(102, 126, 234, 0.95)';
-            navbar.style.backdropFilter = 'blur(10px)';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'transparent';
-            navbar.style.backdropFilter = 'none';
+            navbar.classList.remove('scrolled');
         }
     });
 });
