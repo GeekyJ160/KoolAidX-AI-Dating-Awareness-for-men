@@ -1,3 +1,23 @@
+:root {
+    --primary-font: 'Arial', sans-serif;
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #ff6b6b;
+    --accent-hover-color: #ff5252;
+    --text-light: #fff;
+    --text-dark: #333;
+    --text-muted: #666;
+    --bg-light: #f8f9fa;
+    --bg-dark: #333;
+    --card-bg: #fff;
+    --success-color: #4caf50;
+    --error-color: #f44336;
+    --shadow-color-light: rgba(0, 0, 0, 0.1);
+    --shadow-color-accent: rgba(255, 107, 107, 0.3);
+    --shadow-color-accent-hover: rgba(255, 107, 107, 0.4);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,9 +25,9 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: var(--primary-font);
     line-height: 1.6;
-    color: #333;
+    color: var(--text-dark);
 }
 
 .container {
@@ -18,9 +38,9 @@ body {
 
 /* Header & Navigation */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--primary-gradient);
     min-height: 100vh;
-    color: white;
+    color: var(--text-light);
 }
 
 .navbar {
@@ -28,6 +48,12 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(102, 126, 234, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 .nav-brand h1 {
@@ -42,7 +68,7 @@ body {
 }
 
 .nav-links a {
-    color: white;
+    color: var(--text-light);
     text-decoration: none;
     transition: opacity 0.3s ease;
 }
@@ -79,33 +105,33 @@ body {
 }
 
 .primary-btn {
-    background: #ff6b6b;
-    color: white;
+    background: var(--accent-color);
+    color: var(--text-light);
     border: none;
     padding: 1rem 2rem;
     font-size: 1.1rem;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    box-shadow: 0 4px 15px var(--shadow-color-accent);
 }
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 6px 20px var(--shadow-color-accent-hover);
 }
 
 /* Features Section */
 .features-section {
     padding: 5rem 0;
-    background: #f8f9fa;
+    background: var(--bg-light);
 }
 
 .features-section h3 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #333;
+    color: var(--text-dark);
 }
 
 .features-grid {
@@ -116,16 +142,17 @@ body {
 }
 
 .feature-card {
-    background: white;
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px var(--shadow-color-light);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .feature-icon {
@@ -136,18 +163,18 @@ body {
 .feature-card h4 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: var(--text-dark);
 }
 
 .feature-card p {
-    color: #666;
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
 /* About Section */
 .about-section {
     padding: 5rem 0;
-    background: white;
+    background: var(--card-bg);
 }
 
 .about-content {
@@ -157,12 +184,12 @@ body {
 .about-content h3 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: #333;
+    color: var(--text-dark);
 }
 
 .about-content p {
     font-size: 1.1rem;
-    color: #666;
+    color: var(--text-muted);
     max-width: 800px;
     margin: 0 auto 3rem;
 }
@@ -182,19 +209,19 @@ body {
     display: block;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #667eea;
+    color: var(--primary-color);
 }
 
 .stat-label {
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
 /* Contact Section */
 .contact-section {
     padding: 5rem 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--primary-gradient);
+    color: var(--text-light);
     text-align: center;
 }
 
@@ -228,8 +255,8 @@ body {
 }
 
 .submit-btn {
-    background: #ff6b6b;
-    color: white;
+    background: var(--accent-color);
+    color: var(--text-light);
     border: none;
     padding: 1rem 2rem;
     border-radius: 25px;
@@ -239,25 +266,114 @@ body {
 }
 
 .submit-btn:hover {
-    background: #ff5252;
+    background: var(--accent-hover-color);
 }
 
 /* Footer */
 footer {
-    background: #333;
-    color: white;
+    background: var(--bg-dark);
+    color: var(--text-light);
     text-align: center;
     padding: 2rem 0;
 }
 
+/* Hamburger Menu */
+.hamburger-menu {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.open .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile Navigation */
+.mobile-nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: var(--secondary-color);
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.mobile-nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 1rem;
+    transition: background 0.3s ease;
+}
+
+.mobile-nav-links a:hover {
+    background: var(--primary-color);
+}
+
+.mobile-nav-links.open {
+    display: flex;
+}
+
+
+/* Notification System */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    color: var(--text-light);
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.success {
+    background: var(--success-color);
+}
+
+.notification.error {
+    background: var(--error-color);
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    .hero-content h2 {
-        font-size: 2.5rem;
-    }
-    
     .nav-links {
         display: none;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5rem;
     }
     
     .features-grid {
